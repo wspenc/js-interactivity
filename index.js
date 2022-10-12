@@ -7,12 +7,11 @@ const message = document.querySelector('#message');
 //add movie once add is clicked
 function addMovie(event) {
 event.preventDefault()
-let inputField = document.querySelector('input');
+const inputField = document.querySelector('input');
 
 //Creates an element that'll store movie in list, as well as a new span element (keeps it inline)
 const movie = document.createElement('li')
 const movieTitle = document.createElement('span');
-
 //New span that prints title that was inputted
 movieTitle.textContent = inputField.value;
 movieTitle.addEventListener('click', crossOffMovie)
@@ -36,13 +35,23 @@ inputField.value = ' '
 //delete function
 function deleteMovie(event) {
     message.textContent = 'Movie Deleted'
+    revealMessage()
     event.target.parentNode.remove();
  }
 
  //Create strike through that will "add a movie back" or "watched"
 function crossOffMovie(event)  {
     event.target.classList.toggle('checked')
-        if(event.target.classList.contains('checked')){
+        if(event.target.classList.contains('checked') === true){
+            message.textContent = 'Movie watched!'
+        } else {
             message.textContent = 'Movie added back!'
         }
+        revealMessage()
+}
+
+function revealMessage(){
+    setTimeout(() => {
+        message.classList.add('hide')
+    }, 1000)
 }
